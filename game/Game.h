@@ -7,13 +7,17 @@ private:
 	//Delta time
 	Clock dtClock;
 	float dt;
-	float lastTime;
-	float currTime;
+
+	//Key time
+	float keyTime;
+	float keyTimeMax;
+	float keyTimeIncrement;
 
 	//Window
 	const unsigned WINDOW_WIDTH;
 	const unsigned WINDOW_HEIGHT;
 	ContextSettings window_context_settings;
+	Event windowEvent;
 	RenderWindow* window;
 
 	//Initializers
@@ -36,10 +40,13 @@ public:
 	//Functions
 	bool windowIsOpen();
 
+	//Uodate
 	void updateDT();
-
+	void updateKeyTime();
+	void updateEvents();
 	void update();
-	void render();
 
+	//Render
+	void render();
 };
 

@@ -7,9 +7,12 @@ void Game::initVariables()
 {
 	//Delta Time
 	this->dt = 0.f;
-	this->lastTime = 0.f;
-	this->currTime = 0.f;
 	this->dtClock.restart();
+
+	//Key Time
+	this->keyTime = 0.f;
+	this->keyTimeMax = 0.f;
+	this->keyTimeIncrement = 10.f;
 
 	//Window
 	this->window = nullptr;
@@ -67,6 +70,7 @@ bool Game::windowIsOpen()
 	return this->window->isOpen();
 }
 
+//Update
 void Game::updateDT()
 {
 	this->dt = this->dtClock.restart().asSeconds();
@@ -76,11 +80,33 @@ void Game::updateDT()
 #endif
 }
 
-void Game::update()
+void Game::updateKeyTime()
 {
-	this->updateDT();
+	if (this->keyTime < this->keyTimeMax)
+		this->keyTime += this->keyTimeIncrement * dt;
 }
 
+void Game::updateEvents()
+{
+	while (this->window->pollEvent(this->windowEvent))
+	{
+		if (this->windowEvent.type == sf::Event::Closed)
+		{
+			this->window->close();
+		}
+	}
+}
+
+void Game::update()
+{
+	//Delta Time
+	this->updateDT();
+
+	//Events
+	this->updateEvents();
+}
+
+//Render
 void Game::render()
 {
 	this->window->clear(sf::Color(0.f, 0.f, 0.f, 0.f));
