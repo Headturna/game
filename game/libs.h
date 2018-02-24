@@ -10,3 +10,4 @@
 #include"SFML\Audio.hpp"
 #include"SFML\Network.hpp"
 
+using namespace sf;
