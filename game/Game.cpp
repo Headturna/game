@@ -16,12 +16,15 @@ void Game::initVariables()
 
 	//Window
 	this->window = nullptr;
+	this->frameLimit = 120;
 }
 
 void Game::initWindow()
 {
-	//Settings
-	this->window_context_settings;
+	//Context Settings
+	this->window_context_settings.antialiasingLevel = 4;
+	this->window_context_settings.majorVersion = 4;
+	this->window_context_settings.minorVersion = 5;
 
 	//Create window
 	this->window = new sf::RenderWindow(
@@ -30,6 +33,11 @@ void Game::initWindow()
 		sf::Style::Default, 
 		this->window_context_settings
 	);
+
+	//Window Settings
+	this->window->setFramerateLimit(this->frameLimit);
+	this->window->setMouseCursorVisible(false);
+	this->window->setVerticalSyncEnabled(false);
 }
 
 void Game::initialize()
@@ -97,6 +105,12 @@ void Game::updateEvents()
 	}
 }
 
+void Game::updateKeyboardInput()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Escape))
+		this->window->close();
+}
+
 void Game::update()
 {
 	//Delta Time
@@ -104,6 +118,9 @@ void Game::update()
 
 	//Events
 	this->updateEvents();
+
+	//Input
+	this->updateKeyboardInput();
 }
 
 //Render

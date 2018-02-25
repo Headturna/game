@@ -18,6 +18,7 @@ private:
 	const unsigned WINDOW_HEIGHT;
 	ContextSettings window_context_settings;
 	Event windowEvent;
+	unsigned int frameLimit;
 	RenderWindow* window;
 
 	//Initializers
@@ -44,6 +45,8 @@ public:
 	void updateDT();
 	void updateKeyTime();
 	void updateEvents();
+	void updateKeyboardInput();
+
 	void update();
 
 	//Render

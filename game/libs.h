@@ -3,6 +3,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<fstream>
 
 #include"SFML\System.hpp"
 #include"SFML\Window.hpp"
